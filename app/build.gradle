@@ -12,12 +12,18 @@ android {
     namespace 'com.frantun.yummy'
     compileSdk 33
 
+    def configPropertiesFile = rootProject.file("config.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(configPropertiesFile))
+
     defaultConfig {
         applicationId "com.frantun.yummy"
         minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
+
+        buildConfigField("String", "BASE_URL", properties['baseUrl'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
