@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@+id/navigation_recipes">
+
+    <fragment
+        android:id="@+id/navigation_recipes"
+        android:name="com.frantun.yummy.presentation.ui.recipes.RecipesFragment"
+        android:label="@string/title_recipes"
+        tools:layout="@layout/fragment_recipes">
+        <!--        <action-->
+        <!--            android:id="@+id/movies_to_search_movie_action"-->
+        <!--            app:destination="@+id/navigation_search_movie"-->
+        <!--            app:enterAnim="@animator/fragment_fade_enter"-->
+        <!--            app:exitAnim="@animator/fragment_fade_exit"-->
+        <!--            app:popEnterAnim="@animator/fragment_fade_enter"-->
+        <!--            app:popExitAnim="@animator/fragment_fade_exit" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_saved"
+        android:name="com.frantun.yummy.presentation.ui.saved.SavedFragment"
+        android:label="@string/title_saved"
+        tools:layout="@layout/fragment_saved" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.frantun.yummy.presentation.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

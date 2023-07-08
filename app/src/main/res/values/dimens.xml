@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_0dp">0dp</dimen>
+    <dimen name="dimen_1dp">1dp</dimen>
+    <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_4dp">4dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_14dp">14dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_18dp">18dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_24dp">24dp</dimen>
+    <dimen name="dimen_28dp">28dp</dimen>
+    <dimen name="dimen_36dp">36dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_44dp">44dp</dimen>
+    <dimen name="dimen_56dp">56dp</dimen>
+    <dimen name="dimen_60dp">60dp</dimen>
+    <dimen name="dimen_80dp">80dp</dimen>
+    <dimen name="dimen_100dp">100dp</dimen>
+    <dimen name="dimen_120dp">120dp</dimen>
+    <dimen name="dimen_160dp">160dp</dimen>
+    <dimen name="dimen_180dp">180dp</dimen>
+    <dimen name="dimen_200dp">200dp</dimen>
+    <dimen name="dimen_240dp">240dp</dimen>
+    <dimen name="dimen_340dp">340dp</dimen>
+
+    <dimen name="dimen_12sp">12sp</dimen>
+    <dimen name="dimen_14sp">14sp</dimen>
+    <dimen name="dimen_16sp">16sp</dimen>
+    <dimen name="dimen_18sp">18sp</dimen>
+    <dimen name="dimen_20sp">20sp</dimen>
+    <dimen name="dimen_24sp">24sp</dimen>
+
+    <item name="shadow_dx" format="float" type="dimen">3</item>
+    <item name="shadow_dy" format="float" type="dimen">3</item>
+    <item name="shadow_radius" format="float" type="dimen">5</item>
+</resources>

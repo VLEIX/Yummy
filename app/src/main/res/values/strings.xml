@@ -1,3 +1,30 @@
 <resources>
+
+    <!-- Common -->
     <string name="app_name">Yummy</string>
+    <string name="error_connection">Hubo un error de conexión</string>
+
+    <!-- Home -->
+    <string name="title_recipes">Recetas</string>
+    <string name="title_saved">Guardados</string>
+    <string name="title_profile">Perfil</string>
+
+    <!-- Recipes -->
+    <string name="recipes_header">Encuentra las mejores recetas\npara <b>#YapeLovers</b></string>
+    <string name="recipes_search_recipe">Encuentra tu receta</string>
+    <string name="recipes_category_all">Todo</string>
+    <string name="recipes_category_beef">Carne</string>
+    <string name="recipes_category_chicken">Pollo</string>
+    <string name="recipes_category_dessert">Postre</string>
+    <string name="recipes_category_pasta">Pastas</string>
+    <string name="recipes_category_seafood">Marino</string>
+    <string name="recipes_category_vegetarian">Vegetariano</string>
+    <string name="recipes_recipe_extra_information">%s ingredientes | %s</string>
+    <string name="recipes__result_found">No se encontraron recetas</string>
+
+    <!-- Recipes - Detail -->
+
+    <!-- Saved -->
+
+    <!-- Profile -->
 </resources>
