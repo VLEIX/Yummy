@@ -10,7 +10,7 @@
     <string name="title_profile">Perfil</string>
 
     <!-- Recipes -->
-    <string name="recipes_header">Encuentra las mejores recetas\npara <b>#YapeLovers</b></string>
+    <string name="recipes_header">Las mejores recetas\npara <b>#YapeLovers</b></string>
     <string name="recipes_search_recipe">Encuentra tu receta</string>
     <string name="recipes_category_all">Todo</string>
     <string name="recipes_category_beef">Carne</string>
@@ -19,8 +19,9 @@
     <string name="recipes_category_pasta">Pastas</string>
     <string name="recipes_category_seafood">Marino</string>
     <string name="recipes_category_vegetarian">Vegetariano</string>
-    <string name="recipes_recipe_extra_information">%s ingredientes | %s</string>
-    <string name="recipes__result_found">No se encontraron recetas</string>
+    <string name="recipes_recipe_short_information">%s ingredientes | %s</string>
+    <string name="recipes_recipe_content_description">Imagen de la receta</string>
+    <string name="recipes_result_found">No se encontraron recetas</string>
 
     <!-- Recipes - Detail -->
 

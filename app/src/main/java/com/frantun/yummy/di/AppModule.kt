@@ -35,7 +35,7 @@ object ProvidesModule {
 
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(BuildConfig.API_URL)
             .client(client)
             .build()
     }

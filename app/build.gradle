@@ -23,7 +23,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "BASE_URL", properties['baseUrl'])
+        buildConfigField("String", "API_URL", properties['apiUrl'])
+        buildConfigField("String", "IMAGES_URL", properties['imagesUrl'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

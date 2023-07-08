@@ -8,7 +8,6 @@ object Constants {
     const val PAGE_NEGATIVE = -1
     const val PAGE_ZERO = 0
     const val PAGE_ONE = 1
-    const val URL_TMDB_IMAGE_W500 = "https://image.tmdb.org/t/p/w500"
     const val ERROR_UNEXPECTED = "An unexpected error occurred"
     const val ERROR_CONNECTION = "Couldn't reach server for the following reason:"
 
