@@ -4,4 +4,16 @@
     <style name="ShapeAppearanceOverlay.App.CornerSize20dp" parent="">
         <item name="cornerSize">@dimen/dimen_20dp</item>
     </style>
+
+    <style name="TextInputEditText.SearchBar" parent="">
+        <item name="android:background">@drawable/background_round_corner</item>
+        <item name="android:drawableStart">@drawable/ic_search</item>
+        <item name="android:drawablePadding">@dimen/dimen_12dp</item>
+        <item name="android:drawableTint">?attr/colorAccent</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
+        <item name="android:paddingStart">@dimen/dimen_16dp</item>
+        <item name="android:paddingEnd">@dimen/dimen_16dp</item>
+        <item name="android:textSize">@dimen/dimen_14sp</item>
+    </style>
 </resources>

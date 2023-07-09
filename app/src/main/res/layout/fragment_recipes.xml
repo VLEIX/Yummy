@@ -19,17 +19,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/search_edit_text"
+        style="@style/TextInputEditText.SearchBar"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_48dp"
+        android:layout_marginStart="@dimen/dimen_24dp"
+        android:layout_marginTop="@dimen/dimen_24dp"
+        android:layout_marginEnd="@dimen/dimen_24dp"
+        android:hint="@string/recipes_search_recipe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_text_view" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipes_recycler_view"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_0dp"
         android:layout_marginStart="@dimen/dimen_24dp"
-        android:layout_marginTop="@dimen/dimen_24dp"
+        android:layout_marginTop="@dimen/dimen_18dp"
         android:layout_marginEnd="@dimen/dimen_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/search_edit_text" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress_animation_view"
