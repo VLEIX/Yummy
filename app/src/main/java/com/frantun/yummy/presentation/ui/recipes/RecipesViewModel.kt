@@ -12,23 +12,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     private val getRecipesUseCase: GetRecipesUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<RecipesState?>(null)
+    private val _state = MutableStateFlow<RecipesState>(RecipesState.ShowLoading)
     val state: StateFlow<RecipesState?> get() = _state
 
-    init {
-        viewModelScope.launch {
-            getRecipes()
-        }
-    }
-
-    private fun getRecipes() {
+    fun getRecipes() {
         val resource = getRecipesUseCase()
         resource.onEach { result ->
             when (result) {

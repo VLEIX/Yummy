@@ -43,6 +43,12 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.getRecipes()
+    }
+
     private fun setUi() {
         binding.recipesRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())

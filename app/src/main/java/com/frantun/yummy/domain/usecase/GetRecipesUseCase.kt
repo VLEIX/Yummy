@@ -13,7 +13,6 @@ class GetRecipesUseCase @Inject constructor(
 ) {
     operator fun invoke(): Flow<Resource<RecipesResult>> = flow {
         try {
-            emit(Resource.Loading())
             val recipesResult = recipesRepository.getRecipes()
             recipesResult.data?.let {
                 emit(Resource.Success(it))
