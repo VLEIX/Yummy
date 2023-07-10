@@ -5,28 +5,30 @@ import com.frantun.yummy.common.Resource
 import com.frantun.yummy.data.datasource.RecipesLocalDataSource
 import com.frantun.yummy.data.datasource.RecipesRemoteDataSource
 import com.frantun.yummy.data.remote.dto.RecipesDto
-import com.frantun.yummy.domain.model.RecipesResult
+import com.frantun.yummy.domain.mappers.RecipeDataMapper
+import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.domain.repository.RecipesRepository
 import javax.inject.Inject
 
 class RecipesRepositoryImpl @Inject constructor(
     private val recipesLocalDataSource: RecipesLocalDataSource,
-    private val recipesRemoteDataSource: RecipesRemoteDataSource
+    private val recipesRemoteDataSource: RecipesRemoteDataSource,
+    private val recipeDataMapper: RecipeDataMapper,
 ) : RecipesRepository {
 
-    override suspend fun getRecipes(): Resource<RecipesResult> {
+    override suspend fun getRecipes(): Resource<RecipesModelUi> {
         return try {
             when (val result = recipesRemoteDataSource.getRecipes()) {
                 is Resource.Success -> {
-                    getRecipesResultSuccess(result.data)?.let { recipesResult ->
-                        Resource.Success(recipesResult)
+                    getRecipesResultSuccess(result.data)?.let { recipesDto ->
+                        Resource.Success(recipesDto)
                     } ?: Resource.Error(ERROR_UNEXPECTED)
                 }
 
                 is Resource.Error -> {
                     val recipesLocal = recipesLocalDataSource.getRecipes()
-                    val recipesResult = RecipesResult(recipesLocal)
-                    Resource.Success(recipesResult)
+                    val recipesModelUi = recipeDataMapper.map(recipesLocal)
+                    Resource.Success(recipesModelUi)
                 }
 
                 else -> Resource.Error(ERROR_UNEXPECTED)
@@ -36,11 +38,11 @@ class RecipesRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun getRecipesResultSuccess(recipesDto: RecipesDto?): RecipesResult? {
+    private suspend fun getRecipesResultSuccess(recipesDto: RecipesDto?): RecipesModelUi? {
         return recipesDto?.let {
             recipesLocalDataSource.insertRecipes(recipesDto.recipes)
             val recipesLocal = recipesLocalDataSource.getRecipes()
-            RecipesResult(recipesLocal)
+            recipeDataMapper.map(recipesLocal)
         }
     }
 }

@@ -3,7 +3,7 @@ package com.frantun.yummy.presentation.ui.recipes
 import com.frantun.yummy.common.BaseCoroutineViewModelStateTest
 import com.frantun.yummy.common.Resource
 import com.frantun.yummy.data.remote.dto.RecipeDto
-import com.frantun.yummy.domain.model.RecipesResult
+import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.domain.usecase.GetRecipesUseCase
 import com.frantun.yummy.other.assertStateOrder
 import com.frantun.yummy.presentation.ui.recipes.states.RecipesState
@@ -42,7 +42,7 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
 
     @Test
     fun `when recipes are retrieved, then set state to RetrievedRecipes`() = scope.runTest {
-        val flow = flow { emit(Resource.Success(RecipesResult(listOf(recipe)))) }
+        val flow = flow { emit(Resource.Success(RecipesModelUi(listOf(recipe)))) }
         whenever(getRecipesUseCase()).thenReturn(flow)
 
         val collectJob = backgroundScope.launch(UnconfinedTestDispatcher()) {

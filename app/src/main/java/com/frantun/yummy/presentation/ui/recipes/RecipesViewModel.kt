@@ -3,7 +3,7 @@ package com.frantun.yummy.presentation.ui.recipes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.frantun.yummy.common.Resource
-import com.frantun.yummy.domain.model.RecipesResult
+import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.domain.usecase.GetRecipesUseCase
 import com.frantun.yummy.presentation.ui.recipes.states.RecipesState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,9 +32,9 @@ class RecipesViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun recipesSuccess(recipesResult: RecipesResult?) {
-        recipesResult?.let {
-            _state.value = RecipesState.RetrievedRecipes(it.recipes)
+    private fun recipesSuccess(recipes: RecipesModelUi?) {
+        recipes?.let {
+            _state.value = RecipesState.RetrievedRecipes(it)
         }
     }
 }

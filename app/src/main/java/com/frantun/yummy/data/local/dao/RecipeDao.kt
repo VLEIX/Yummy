@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.frantun.yummy.data.local.entity.RecipeFull
+import com.frantun.yummy.data.local.entity.RecipeAndRelations
 import com.frantun.yummy.data.local.entity.RecipeEntity
 
 @Dao
@@ -16,5 +16,5 @@ interface RecipeDao {
 
     @Transaction
     @Query("SELECT * FROM recipes")
-    suspend fun getRecipes(): List<RecipeFull>
+    suspend fun getRecipes(): List<RecipeAndRelations>
 }

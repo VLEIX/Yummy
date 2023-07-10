@@ -6,7 +6,7 @@ import com.frantun.yummy.data.local.dao.RecipeDao
 import com.frantun.yummy.data.local.entity.IngredientEntity
 import com.frantun.yummy.data.local.entity.OriginEntity
 import com.frantun.yummy.data.local.entity.RecipeEntity
-import com.frantun.yummy.data.local.entity.RecipeFull
+import com.frantun.yummy.data.local.entity.RecipeAndRelations
 import com.frantun.yummy.data.remote.dto.RecipeDto
 import javax.inject.Inject
 
@@ -49,7 +49,7 @@ class RecipesLocalDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getRecipes(): List<RecipeFull> {
+    override suspend fun getRecipes(): List<RecipeAndRelations> {
         return recipeDao.getRecipes()
     }
 }

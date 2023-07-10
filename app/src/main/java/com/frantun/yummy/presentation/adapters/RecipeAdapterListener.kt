@@ -1,7 +1,7 @@
 package com.frantun.yummy.presentation.adapters
 
-import com.frantun.yummy.data.local.entity.RecipeEntity
+import com.frantun.yummy.domain.model.RecipeModelUi
 
-class RecipeAdapterListener(val clickListener: (recipe: RecipeEntity) -> Unit) {
-    fun onClick(recipe: RecipeEntity) = clickListener(recipe)
+class RecipeAdapterListener(val clickListener: (recipe: RecipeModelUi) -> Unit) {
+    fun onClick(recipe: RecipeModelUi) = clickListener(recipe)
 }

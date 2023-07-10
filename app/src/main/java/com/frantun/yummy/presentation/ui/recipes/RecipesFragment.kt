@@ -7,8 +7,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.frantun.yummy.data.local.entity.RecipeFull
 import com.frantun.yummy.databinding.FragmentRecipesBinding
+import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.other.setAsGone
 import com.frantun.yummy.other.setAsVisible
 import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
@@ -69,8 +69,8 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
         binding.progressAnimationView.setAsVisible()
     }
 
-    private fun onRetrievedRecipes(recipes: List<RecipeFull>) {
+    private fun onRetrievedRecipes(recipes: RecipesModelUi) {
         binding.progressAnimationView.setAsGone()
-        recipesAdapter.submitList(recipes)
+        recipesAdapter.submitList(recipes.recipes)
     }
 }
