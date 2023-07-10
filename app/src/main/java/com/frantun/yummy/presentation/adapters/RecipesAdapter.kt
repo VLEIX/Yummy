@@ -32,7 +32,7 @@ class RecipesAdapter(private val listener: RecipeAdapterListener) :
                 nameTextView.text = item.recipe.name
                 shortInformationTextView.text = itemView.context.getString(
                     R.string.recipes_recipe_short_information,
-                    "10",
+                    item.ingredients.size,
                     item.origin.name
                 )
                 Glide.with(thumbImageView.context)

@@ -4,9 +4,10 @@ import android.os.Parcelable
 import androidx.room.Entity
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "ingredients")
+@Entity(tableName = "ingredients", primaryKeys = ["name", "ingredientRecipeId"])
 @Parcelize
 data class IngredientEntity(
     val name: String,
+    val ingredientRecipeId: String,
     val measure: String
 ) : Parcelable

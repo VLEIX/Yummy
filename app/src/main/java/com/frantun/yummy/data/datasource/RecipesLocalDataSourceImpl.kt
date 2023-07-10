@@ -1,17 +1,19 @@
 package com.frantun.yummy.data.datasource
 
+import com.frantun.yummy.data.local.dao.IngredientDao
 import com.frantun.yummy.data.local.dao.OriginDao
 import com.frantun.yummy.data.local.dao.RecipeDao
+import com.frantun.yummy.data.local.entity.IngredientEntity
 import com.frantun.yummy.data.local.entity.OriginEntity
 import com.frantun.yummy.data.local.entity.RecipeEntity
 import com.frantun.yummy.data.local.entity.RecipeFull
 import com.frantun.yummy.data.remote.dto.RecipeDto
-import com.frantun.yummy.data.remote.dto.RecipesDto
 import javax.inject.Inject
 
 class RecipesLocalDataSourceImpl @Inject constructor(
     private val recipeDao: RecipeDao,
-    private val originDao: OriginDao
+    private val originDao: OriginDao,
+    private val ingredientDao: IngredientDao
 ) : RecipesLocalDataSource {
 
     override suspend fun insertRecipes(recipes: List<RecipeDto>) {
@@ -35,6 +37,15 @@ class RecipesLocalDataSourceImpl @Inject constructor(
                     longitude = it.origin.longitude,
                 )
             )
+            it.ingredients.forEach { ingredient ->
+                ingredientDao.insertIngredient(
+                    IngredientEntity(
+                        name = ingredient.name,
+                        ingredientRecipeId = it.id,
+                        measure = ingredient.measure
+                    )
+                )
+            }
         }
     }
 

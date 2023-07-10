@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.frantun.yummy.common.Constants.DATABASE_NAME
 import com.frantun.yummy.data.local.AppDatabase
+import com.frantun.yummy.data.local.dao.IngredientDao
 import com.frantun.yummy.data.local.dao.OriginDao
 import com.frantun.yummy.data.local.dao.RecipeDao
 import dagger.Module
@@ -25,6 +26,11 @@ object DatabaseModule {
     @Provides
     fun providesOriginDao(database: AppDatabase): OriginDao {
         return database.originDao()
+    }
+
+    @Provides
+    fun providesIngredientDao(database: AppDatabase): IngredientDao {
+        return database.ingredientDao()
     }
 
     @Provides
