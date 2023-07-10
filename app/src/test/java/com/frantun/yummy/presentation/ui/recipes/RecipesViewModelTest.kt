@@ -2,7 +2,7 @@ package com.frantun.yummy.presentation.ui.recipes
 
 import com.frantun.yummy.common.BaseCoroutineViewModelStateTest
 import com.frantun.yummy.common.Resource
-import com.frantun.yummy.domain.model.Recipe
+import com.frantun.yummy.data.remote.dto.RecipeDto
 import com.frantun.yummy.domain.model.RecipesResult
 import com.frantun.yummy.domain.usecase.GetRecipesUseCase
 import com.frantun.yummy.other.assertStateOrder
@@ -31,7 +31,7 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
     private lateinit var getRecipesUseCase: GetRecipesUseCase
 
     @Mock
-    private lateinit var recipe: Recipe
+    private lateinit var recipe: RecipeDto
 
     override fun before() {
         super.before()

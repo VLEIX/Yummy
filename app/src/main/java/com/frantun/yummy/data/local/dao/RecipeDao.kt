@@ -4,14 +4,17 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.frantun.yummy.domain.model.Recipe
+import androidx.room.Transaction
+import com.frantun.yummy.data.local.entity.RecipeFull
+import com.frantun.yummy.data.local.entity.RecipeEntity
 
 @Dao
 interface RecipeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipes(recipes: List<Recipe>)
+    suspend fun insertRecipe(recipe: RecipeEntity)
 
+    @Transaction
     @Query("SELECT * FROM recipes")
-    suspend fun getRecipes(): List<Recipe>
+    suspend fun getRecipes(): List<RecipeFull>
 }

@@ -1,17 +1,12 @@
-package com.frantun.yummy.domain.model
+package com.frantun.yummy.data.remote.dto
 
-import android.os.Parcelable
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "origins")
-@Parcelize
-data class Origin(
+data class OriginDto(
     @SerializedName("name")
     val name: String,
     @SerializedName("latitude")
     val latitude: Double,
     @SerializedName("longitude")
     val longitude: Double,
-) : Parcelable
+)
