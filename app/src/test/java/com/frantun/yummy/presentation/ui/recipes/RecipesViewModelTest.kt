@@ -2,7 +2,7 @@ package com.frantun.yummy.presentation.ui.recipes
 
 import com.frantun.yummy.common.BaseCoroutineViewModelStateTest
 import com.frantun.yummy.common.Resource
-import com.frantun.yummy.data.remote.dto.RecipeDto
+import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.domain.usecase.GetRecipesUseCase
 import com.frantun.yummy.other.assertStateOrder
@@ -31,13 +31,13 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
     private lateinit var getRecipesUseCase: GetRecipesUseCase
 
     @Mock
-    private lateinit var recipe: RecipeDto
+    private lateinit var recipe: RecipeModelUi
 
     override fun before() {
         super.before()
         sut = RecipesViewModel(getRecipesUseCase)
 
-        whenever(recipe.id).thenReturn(ID_RECIPE)
+        whenever(recipe.recipeId).thenReturn(ID_RECIPE)
     }
 
     @Test
@@ -56,7 +56,7 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
             RecipesState.RetrievedRecipes::class
         )
         with(stateList[1] as RecipesState.RetrievedRecipes) {
-            assertEquals(ID_RECIPE, recipes.first().id)
+            assertEquals(ID_RECIPE, recipes.recipes.first().recipeId)
         }
 
         collectJob.cancel()
