@@ -2,14 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_navigation"
+    android:id="@+id/yummy_navigation"
     app:startDestination="@+id/navigation_recipes">
 
     <fragment
         android:id="@+id/navigation_recipes"
         android:name="com.frantun.yummy.presentation.ui.recipes.RecipesFragment"
         android:label="@string/title_recipes"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_recipes">
+
+        <action
+            android:id="@+id/action_to_detail"
+            app:destination="@+id/navigation_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_saved"
@@ -22,4 +27,15 @@
         android:name="com.frantun.yummy.presentation.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_detail"
+        android:name="com.frantun.yummy.presentation.ui.detail.DetailFragment"
+        android:label="@string/detail_title"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="recipe"
+            app:argType="com.frantun.yummy.domain.model.RecipeModelUi"
+            app:nullable="false" />
+    </fragment>
 </navigation>

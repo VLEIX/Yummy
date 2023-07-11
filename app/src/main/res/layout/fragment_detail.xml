@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/dimen_24dp"
+    android:paddingTop="@dimen/dimen_24dp"
+    android:paddingEnd="@dimen/dimen_24dp"
+    tools:context=".presentation.ui.detail.DetailFragment">
+
+    <Button
+        android:id="@+id/back_button"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_back_rounded"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/map_button"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title_text_view"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_8dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/back_button"
+        app:layout_constraintEnd_toStartOf="@id/map_button"
+        app:layout_constraintStart_toEndOf="@id/back_button"
+        app:layout_constraintTop_toTopOf="@id/back_button"
+        tools:text="Name recipe" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/thumb_image_view"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_240dp"
+        android:layout_marginTop="@dimen/dimen_24dp"
+        android:contentDescription="@string/recipes_recipe_content_description"
+        android:scaleType="centerCrop"
+        android:tintMode="src_atop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_text_view"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize20dp"
+        app:tint="@color/black_with_alpha" />
+
+    <Button
+        android:id="@+id/play_button"
+        style="?attr/materialIconButtonFilledStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_play"
+        app:layout_constraintBottom_toBottomOf="@id/thumb_image_view"
+        app:layout_constraintEnd_toEndOf="@id/thumb_image_view"
+        app:layout_constraintStart_toStartOf="@id/thumb_image_view"
+        app:layout_constraintTop_toTopOf="@id/thumb_image_view" />
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/video_player_view"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_240dp"
+        android:layout_marginTop="@dimen/dimen_24dp"
+        android:background="@drawable/bg_transparent_rounded_20dp"
+        android:outlineProvider="background"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_text_view"
+        tools:visibility="visible" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/thumb_image_view">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ingredients_text_view"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                tools:text="@string/detail_ingredients" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredients_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/view_ingredient" />
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:text="@string/detail_preparation" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/preparation_text_view"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                tools:text="Instructions" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

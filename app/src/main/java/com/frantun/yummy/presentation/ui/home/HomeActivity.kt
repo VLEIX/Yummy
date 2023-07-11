@@ -1,6 +1,5 @@
 package com.frantun.yummy.presentation.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController

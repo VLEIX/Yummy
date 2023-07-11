@@ -18,7 +18,7 @@ fun View.setAsVisible() {
     this.visibility = View.VISIBLE
 }
 
-fun View.setAsInVisible() {
+fun View.setAsInvisible() {
     this.visibility = View.INVISIBLE
 }
 

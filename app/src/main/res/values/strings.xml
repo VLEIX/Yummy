@@ -24,6 +24,9 @@
     <string name="recipes_result_found">No se encontraron recetas</string>
 
     <!-- Recipes - Detail -->
+    <string name="detail_title">Detalle</string>
+    <string name="detail_preparation">Preparación</string>
+    <string name="detail_ingredients">Ingredientes (%d)</string>
 
     <!-- Saved -->
 

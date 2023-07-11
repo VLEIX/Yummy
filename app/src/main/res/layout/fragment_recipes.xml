@@ -8,7 +8,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/header_text_view"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_24dp"
@@ -42,7 +42,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+        tools:itemCount="3"
+        tools:listitem="@layout/view_recipe" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress_animation_view"

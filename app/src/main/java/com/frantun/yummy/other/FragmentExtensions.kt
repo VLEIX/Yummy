@@ -20,6 +20,10 @@ fun Fragment.popBackStack() {
     findNavController().popBackStack()
 }
 
+fun Fragment.navigateUp() {
+    findNavController().navigateUp()
+}
+
 fun Fragment.finish() {
     requireActivity().finish()
 }

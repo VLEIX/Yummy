@@ -44,6 +44,6 @@
         app:layout_constraintBottom_toBottomOf="@id/thumb_image_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="12 ingredientes | British"
+        tools:text="@string/recipes_search_recipe"
         tools:textColor="@color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>
