@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
 import com.frantun.yummy.R
 import com.frantun.yummy.databinding.FragmentDetailBinding
@@ -31,8 +32,16 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedElementEnterTransition =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+
+        setupTransitions()
         setupUi()
         setupListeners()
+    }
+
+    private fun setupTransitions() {
+        binding.thumbImageView.transitionName = recipe.thumb
     }
 
     private fun setupUi() {

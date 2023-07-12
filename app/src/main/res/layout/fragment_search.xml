@@ -25,6 +25,7 @@
         android:layout_height="@dimen/dimen_48dp"
         android:layout_marginStart="@dimen/dimen_8dp"
         android:hint="@string/recipes_search_recipe"
+        android:transitionName="@string/search_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/back_button"
         app:layout_constraintTop_toTopOf="parent" />

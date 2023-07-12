@@ -5,11 +5,16 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.navigateTo(navDirections: NavDirections) {
     findNavController().navigate(navDirections)
+}
+
+fun Fragment.navigateTo(navDirections: NavDirections, navigatorExtras: Navigator.Extras) {
+    findNavController().navigate(navDirections, navigatorExtras)
 }
 
 fun Fragment.navigateTo(intent: Intent) {

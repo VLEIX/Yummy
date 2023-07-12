@@ -2,11 +2,14 @@ package com.frantun.yummy.presentation.ui.recipes
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.frantun.yummy.R
 import com.frantun.yummy.databinding.FragmentRecipesBinding
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
@@ -17,6 +20,7 @@ import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipesAdapter
 import com.frantun.yummy.presentation.common.BaseFragment
 import com.frantun.yummy.presentation.ui.recipes.states.RecipesState
+import com.google.android.material.imageview.ShapeableImageView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -26,8 +30,8 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
     private val viewModel: RecipesViewModel by viewModels()
 
     private val recipesAdapter by lazy {
-        RecipesAdapter(RecipeAdapterListener {
-            navigateToDetail(it)
+        RecipesAdapter(RecipeAdapterListener { recipe, thumbImageView ->
+            navigateToDetail(recipe, thumbImageView)
         })
     }
 
@@ -36,6 +40,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
 
         setupUi()
         setupListeners()
+        setupAnimations()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -46,17 +51,17 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        viewModel.getRecipes()
-    }
-
     private fun setupUi() {
         binding.recipesRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recipesAdapter
-            itemAnimator = null
+        }
+    }
+
+    private fun setupAnimations() {
+        postponeEnterTransition()
+        binding.recipesRecyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
         }
     }
 
@@ -83,11 +88,17 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
     }
 
     private fun navigateToSearch() {
-        navigateTo(RecipesFragmentDirections.actionToSearch())
+        val extras = FragmentNavigatorExtras(
+            binding.searchEditText to getString(R.string.search_edit_text)
+        )
+        navigateTo(RecipesFragmentDirections.actionToSearch(), extras)
     }
 
-    private fun navigateToDetail(recipe: RecipeModelUi) {
+    private fun navigateToDetail(recipe: RecipeModelUi, thumbImageView: ShapeableImageView) {
         val action = RecipesFragmentDirections.actionToDetail(recipe)
-        navigateTo(action)
+        val extras = FragmentNavigatorExtras(
+            thumbImageView to thumbImageView.transitionName
+        )
+        navigateTo(action, extras)
     }
 }

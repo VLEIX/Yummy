@@ -3,13 +3,16 @@ package com.frantun.yummy.presentation.ui.search
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.doOnPreDraw
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.frantun.yummy.R
 import com.frantun.yummy.databinding.FragmentSearchBinding
 import com.frantun.yummy.domain.model.RecipeModelUi
@@ -20,11 +23,13 @@ import com.frantun.yummy.other.navigateUp
 import com.frantun.yummy.other.setAsGone
 import com.frantun.yummy.other.setAsVisible
 import com.frantun.yummy.other.setSafeOnClickListener
+import com.frantun.yummy.other.showKeyboard
 import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipesAdapter
 import com.frantun.yummy.presentation.common.BaseFragment
 import com.frantun.yummy.presentation.ui.recipes.RecipesFragmentDirections
 import com.frantun.yummy.presentation.ui.search.states.SearchState
+import com.google.android.material.imageview.ShapeableImageView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -34,16 +39,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
 
     private val recipesAdapter by lazy {
-        RecipesAdapter(RecipeAdapterListener {
-            navigateToDetail(it)
+        RecipesAdapter(RecipeAdapterListener { recipe, thumbImageView ->
+            navigateToDetail(recipe, thumbImageView)
         })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedElementEnterTransition =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+
         setupUi()
         setupListeners()
+        setupAnimations()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -55,10 +64,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     private fun setupUi() {
-        binding.recipesRecyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = recipesAdapter
-            itemAnimator = null
+        binding.apply {
+            recipesRecyclerView.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = recipesAdapter
+            }
+            showKeyboard(searchEditText)
         }
     }
 
@@ -84,6 +95,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
                     hideKeyboard()
                 }
             })
+        }
+    }
+
+    private fun setupAnimations() {
+        postponeEnterTransition()
+        binding.recipesRecyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
         }
     }
 
@@ -136,8 +154,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         recipesAdapter.submitList(recipes.recipes)
     }
 
-    private fun navigateToDetail(recipe: RecipeModelUi) {
+    private fun navigateToDetail(recipe: RecipeModelUi, thumbImageView: ShapeableImageView) {
         val action = RecipesFragmentDirections.actionToDetail(recipe)
-        navigateTo(action)
+        val extras = FragmentNavigatorExtras(
+            thumbImageView to thumbImageView.transitionName
+        )
+        navigateTo(action, extras)
     }
 }

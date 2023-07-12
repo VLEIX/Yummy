@@ -36,14 +36,17 @@ class RecipesAdapter(private val listener: RecipeAdapterListener) :
                     item.ingredients.size,
                     item.origin.name
                 )
-                Glide.with(thumbImageView.context)
-                    .load(item.thumb)
-                    .into(thumbImageView)
+                thumbImageView.apply {
+                    transitionName = item.thumb
+                    Glide.with(context)
+                        .load(item.thumb)
+                        .into(this)
+                }
             }
             itemView.apply {
                 animation = AnimationUtils.loadAnimation(itemView.context, R.anim.alpha)
                 setSafeOnClickListener {
-                    listener.onClick(item)
+                    listener.onClick(item, binding.thumbImageView)
                 }
             }
         }
