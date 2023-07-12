@@ -53,4 +53,8 @@ class RecipesLocalDataSourceImpl @Inject constructor(
     override suspend fun getRecipes(): List<RecipeAndRelations> {
         return recipeDao.getRecipes()
     }
+
+    override suspend fun getRecipesByText(text: String): List<RecipeAndRelations> {
+        return recipeDao.getRecipesByText(text)
+    }
 }

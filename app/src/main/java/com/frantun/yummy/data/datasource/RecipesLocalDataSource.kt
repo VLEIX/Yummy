@@ -6,4 +6,5 @@ import com.frantun.yummy.data.remote.dto.RecipeDto
 interface RecipesLocalDataSource {
     suspend fun insertRecipes(recipes: List<RecipeDto>)
     suspend fun getRecipes(): List<RecipeAndRelations>
+    suspend fun getRecipesByText(text: String): List<RecipeAndRelations>
 }

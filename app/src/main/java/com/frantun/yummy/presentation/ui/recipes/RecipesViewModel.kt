@@ -19,7 +19,7 @@ class RecipesViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<RecipesState>(RecipesState.ShowLoading)
-    val state: StateFlow<RecipesState?> get() = _state
+    val state: StateFlow<RecipesState> get() = _state
 
     fun getRecipes() {
         val resource = getRecipesUseCase()

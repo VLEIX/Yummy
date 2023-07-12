@@ -38,6 +38,16 @@ class RecipesRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getRecipesByText(text: String): Resource<RecipesModelUi> {
+        return try {
+            val recipesLocal = recipesLocalDataSource.getRecipesByText(text)
+            val recipesModelUi = recipeDataMapper.map(recipesLocal)
+            Resource.Success(recipesModelUi)
+        } catch (exception: Exception) {
+            Resource.Error(exception.message ?: exception.toString())
+        }
+    }
+
     private suspend fun getRecipesResultSuccess(recipesDto: RecipesDto?): RecipesModelUi? {
         return recipesDto?.let {
             recipesLocalDataSource.insertRecipes(recipesDto.recipes)

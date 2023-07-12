@@ -5,4 +5,5 @@ import com.frantun.yummy.domain.model.RecipesModelUi
 
 interface RecipesRepository {
     suspend fun getRecipes(): Resource<RecipesModelUi>
+    suspend fun getRecipesByText(text: String): Resource<RecipesModelUi>
 }

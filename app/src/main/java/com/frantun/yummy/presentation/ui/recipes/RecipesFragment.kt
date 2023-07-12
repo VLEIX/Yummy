@@ -35,6 +35,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
         super.onViewCreated(view, savedInstanceState)
 
         setupUi()
+        setupListeners()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -59,11 +60,16 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
         }
     }
 
-    private fun onStateUpdated(state: RecipesState?) {
+    private fun setupListeners() {
+        binding.searchEditText.setOnClickListener {
+            navigateToSearch()
+        }
+    }
+
+    private fun onStateUpdated(state: RecipesState) {
         when (state) {
             is RecipesState.ShowLoading -> onShowLoading()
             is RecipesState.RetrievedRecipes -> onRetrievedRecipes(state.recipes)
-            else -> Unit
         }
     }
 
@@ -74,6 +80,10 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
     private fun onRetrievedRecipes(recipes: RecipesModelUi) {
         binding.progressAnimationView.setAsGone()
         recipesAdapter.submitList(recipes.recipes)
+    }
+
+    private fun navigateToSearch() {
+        navigateTo(RecipesFragmentDirections.actionToSearch())
     }
 
     private fun navigateToDetail(recipe: RecipeModelUi) {
