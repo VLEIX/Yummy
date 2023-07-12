@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.frantun.yummy.R
 import com.frantun.yummy.databinding.ViewRecipeBinding
 import com.frantun.yummy.domain.model.RecipeModelUi
+import com.frantun.yummy.other.setSafeOnClickListener
 
 class RecipesAdapter(private val listener: RecipeAdapterListener) :
     ListAdapter<RecipeModelUi, RecyclerView.ViewHolder>(RecipesAdapterDiffCallback()) {
@@ -41,7 +42,7 @@ class RecipesAdapter(private val listener: RecipeAdapterListener) :
             }
             itemView.apply {
                 animation = AnimationUtils.loadAnimation(itemView.context, R.anim.alpha)
-                setOnClickListener {
+                setSafeOnClickListener {
                     listener.onClick(item)
                 }
             }

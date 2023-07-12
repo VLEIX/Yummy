@@ -86,6 +86,9 @@ dependencies {
     // Youtube Player
     implementation "com.pierfrancescosoffritti.androidyoutubeplayer:core:$youtube_player_version"
 
+    // Maps
+    implementation "com.google.android.gms:play-services-maps:$play_services_maps_version"
+
     // Test
     testImplementation "androidx.arch.core:core-testing:$core_testing_version"
     testImplementation "org.junit.jupiter:junit-jupiter:$junit_jupiter_version"

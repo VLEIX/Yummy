@@ -33,6 +33,7 @@ class RecipesLocalDataSourceImpl @Inject constructor(
                 OriginEntity(
                     name = it.origin.name,
                     originRecipeId = it.id,
+                    description = it.origin.description,
                     latitude = it.origin.latitude,
                     longitude = it.origin.longitude,
                 )

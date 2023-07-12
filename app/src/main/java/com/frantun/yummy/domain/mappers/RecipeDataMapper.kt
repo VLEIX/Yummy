@@ -16,6 +16,7 @@ class RecipeDataMapper @Inject constructor() : Mapper<List<RecipeAndRelations>, 
             val recipes = this.map {
                 val origin = OriginModelUi(
                     name = it.origin.name,
+                    description = it.origin.description,
                     latitude = it.origin.latitude,
                     longitude = it.origin.longitude,
                 )

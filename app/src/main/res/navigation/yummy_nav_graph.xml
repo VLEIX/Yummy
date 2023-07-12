@@ -33,9 +33,25 @@
         android:name="com.frantun.yummy.presentation.ui.detail.DetailFragment"
         android:label="@string/detail_title"
         tools:layout="@layout/fragment_detail">
+
         <argument
             android:name="recipe"
             app:argType="com.frantun.yummy.domain.model.RecipeModelUi"
             app:nullable="false" />
+
+        <action
+            android:id="@+id/action_to_map"
+            app:destination="@+id/navigation_map" />
     </fragment>
+
+    <dialog
+        android:id="@+id/navigation_map"
+        android:name="com.frantun.yummy.presentation.ui.map.MapBottomSheet"
+        android:label="@string/map_title"
+        tools:layout="@layout/bottom_sheet_map">
+        <argument
+            android:name="origin"
+            app:argType="com.frantun.yummy.domain.model.OriginModelUi"
+            app:nullable="false" />
+    </dialog>
 </navigation>

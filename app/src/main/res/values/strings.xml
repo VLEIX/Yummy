@@ -28,6 +28,9 @@
     <string name="detail_preparation">Preparación</string>
     <string name="detail_ingredients">Ingredientes (%d)</string>
 
+    <!-- Recipes - Detail - Map -->
+    <string name="map_title">Mapa</string>
+
     <!-- Saved -->
 
     <!-- Profile -->

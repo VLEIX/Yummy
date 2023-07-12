@@ -16,8 +16,8 @@ class SafeClickListener(
         onSafeCLick(v)
     }
 
-    companion object {
-        private const val DEFAULT_INTERVAL: Int = 1000
-        private const val LAST_TIME_CLICKED_INITIAL: Long = 0
+    private companion object {
+        const val DEFAULT_INTERVAL: Int = 1000
+        const val LAST_TIME_CLICKED_INITIAL: Long = 0
     }
 }

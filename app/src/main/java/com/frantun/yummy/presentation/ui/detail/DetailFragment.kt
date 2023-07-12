@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.frantun.yummy.R
 import com.frantun.yummy.databinding.FragmentDetailBinding
+import com.frantun.yummy.domain.model.OriginModelUi
+import com.frantun.yummy.other.navigateTo
 import com.frantun.yummy.other.navigateUp
 import com.frantun.yummy.other.setAsGone
 import com.frantun.yummy.other.setAsInvisible
 import com.frantun.yummy.other.setAsVisible
+import com.frantun.yummy.other.setSafeOnClickListener
 import com.frantun.yummy.presentation.adapters.IngredientsAdapter
 import com.frantun.yummy.presentation.common.BaseFragment
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -21,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
     private val args by navArgs<DetailFragmentArgs>()
-
     private val recipe by lazy { args.recipe }
 
     private val ingredientsAdapter by lazy { IngredientsAdapter() }
@@ -54,13 +56,13 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
 
     private fun setupListeners() {
         binding.apply {
-            backButton.setOnClickListener {
+            backButton.setSafeOnClickListener {
                 navigateUp()
             }
-            mapButton.setOnClickListener {
-
+            mapButton.setSafeOnClickListener {
+                navigateToMap(recipe.origin)
             }
-            playButton.setOnClickListener {
+            playButton.setSafeOnClickListener {
                 showVideoComponents()
                 playYoutubeVideo(recipe.video)
             }
@@ -81,5 +83,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 youTubePlayer.loadVideo(videoKey, 0F)
             }
         })
+    }
+
+    private fun navigateToMap(origin: OriginModelUi) {
+        val action = DetailFragmentDirections.actionToMap(origin)
+        navigateTo(action)
     }
 }

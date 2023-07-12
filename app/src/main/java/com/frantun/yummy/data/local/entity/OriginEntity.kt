@@ -6,6 +6,7 @@ import androidx.room.Entity
 data class OriginEntity(
     val name: String,
     val originRecipeId: String,
+    val description: String,
     val latitude: Double,
     val longitude: Double,
 )
