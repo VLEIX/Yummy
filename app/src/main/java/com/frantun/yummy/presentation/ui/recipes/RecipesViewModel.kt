@@ -25,20 +25,20 @@ class RecipesViewModel @Inject constructor(
         getRecipes()
     }
 
-    fun getRecipes() {
+    private fun getRecipes() {
         val resource = getRecipesUseCase()
         resource.onEach { result ->
             when (result) {
                 is Resource.Loading -> _state.value = RecipesState.ShowLoading
                 is Resource.Success -> recipesSuccess(result.data)
-                is Resource.Error -> Unit
+                is Resource.Error -> _state.value = RecipesState.ShowError
             }
         }.launchIn(viewModelScope)
     }
 
     private fun recipesSuccess(recipes: RecipesModelUi?) {
-        recipes?.let {
-            _state.value = RecipesState.RetrievedRecipes(it)
-        }
+        _state.value = recipes?.let {
+            RecipesState.RetrievedRecipes(it)
+        } ?: RecipesState.ShowError
     }
 }

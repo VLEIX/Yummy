@@ -50,6 +50,20 @@
         tools:itemCount="3"
         tools:listitem="@layout/view_recipe" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/message_text_view"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_24dp"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+        tools:text="Message"
+        tools:visibility="visible" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress_animation_view"
         android:layout_width="@dimen/dimen_0dp"

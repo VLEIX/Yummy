@@ -75,15 +75,35 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
         when (state) {
             is RecipesState.ShowLoading -> onShowLoading()
             is RecipesState.RetrievedRecipes -> onRetrievedRecipes(state.recipes)
+            is RecipesState.ShowError -> onShowError()
         }
     }
 
     private fun onShowLoading() {
-        binding.progressAnimationView.setAsVisible()
+        binding.apply {
+            progressAnimationView.setAsVisible()
+            messageTextView.setAsGone()
+            recipesRecyclerView.setAsGone()
+        }
+    }
+
+    private fun onShowError() {
+        binding.apply {
+            progressAnimationView.setAsGone()
+            messageTextView.apply {
+                setAsVisible()
+                text = getString(R.string.common_error)
+            }
+            recipesRecyclerView.setAsGone()
+        }
     }
 
     private fun onRetrievedRecipes(recipes: RecipesModelUi) {
-        binding.progressAnimationView.setAsGone()
+        binding.apply {
+            progressAnimationView.setAsGone()
+            messageTextView.setAsGone()
+            recipesRecyclerView.setAsVisible()
+        }
         recipesAdapter.submitList(recipes.recipes)
     }
 

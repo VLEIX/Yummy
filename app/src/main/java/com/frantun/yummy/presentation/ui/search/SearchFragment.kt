@@ -111,6 +111,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             is SearchState.ShowLoading -> onShowLoading()
             is SearchState.NoRecipes -> onNoRecipes()
             is SearchState.RetrievedRecipes -> onRetrievedRecipes(state.recipes)
+            is SearchState.ShowError -> onShowError()
         }
     }
 
@@ -152,6 +153,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             recipesRecyclerView.setAsVisible()
         }
         recipesAdapter.submitList(recipes.recipes)
+    }
+
+    private fun onShowError() {
+        binding.apply {
+            searchAnimationView.setAsGone()
+            progressAnimationView.setAsGone()
+            messageTextView.apply {
+                setAsVisible()
+                text = getString(R.string.common_error)
+            }
+            recipesRecyclerView.setAsGone()
+        }
     }
 
     private fun navigateToDetail(recipe: RecipeModelUi, thumbImageView: ShapeableImageView) {

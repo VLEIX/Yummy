@@ -35,34 +35,57 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
 
     override fun before() {
         super.before()
-        sut = RecipesViewModel(getRecipesUseCase)
 
         whenever(recipe.recipeId).thenReturn(ID_RECIPE)
     }
 
-    @Test
-    fun `when recipes are retrieved, then set state to RetrievedRecipes`() = scope.runTest {
-        val flow = flow { emit(Resource.Success(RecipesModelUi(listOf(recipe)))) }
-        whenever(getRecipesUseCase()).thenReturn(flow)
-
-        val collectJob = backgroundScope.launch(UnconfinedTestDispatcher()) {
-            sut.state.toList(stateList)
-        }
-
-        sut.getRecipes()
-
-        stateList.assertStateOrder(
-            RecipesState.ShowLoading::class,
-            RecipesState.RetrievedRecipes::class
-        )
-        with(stateList[1] as RecipesState.RetrievedRecipes) {
-            assertEquals(ID_RECIPE, recipes.recipes.first().recipeId)
-        }
-
-        collectJob.cancel()
+    private suspend fun setupSut() {
+        sut = RecipesViewModel(getRecipesUseCase)
+        sut.state.toList(stateList)
     }
+
+    @Test
+    fun `Starting flow should emit RetrievedRecipes when recipes service successes`() =
+        scope.runTest {
+            val flow = flow { emit(Resource.Success(RecipesModelUi(listOf(recipe)))) }
+            whenever(getRecipesUseCase()).thenReturn(flow)
+
+            val collectJob = backgroundScope.launch(UnconfinedTestDispatcher()) {
+                setupSut()
+            }
+
+            stateList.assertStateOrder(
+                RecipesState.ShowLoading::class,
+                RecipesState.RetrievedRecipes::class
+            )
+            with(stateList[1] as RecipesState.RetrievedRecipes) {
+                assertEquals(ID_RECIPE, recipes.recipes.first().recipeId)
+            }
+
+            collectJob.cancel()
+        }
+
+    @Test
+    fun `Starting flow should emit ShowError when recipes service failed`() =
+        scope.runTest {
+            val value: Resource<RecipesModelUi> = Resource.Error(ERROR_MESSAGE)
+            val flow = flow { emit(value) }
+            whenever(getRecipesUseCase()).thenReturn(flow)
+
+            val collectJob = backgroundScope.launch(UnconfinedTestDispatcher()) {
+                setupSut()
+            }
+
+            stateList.assertStateOrder(
+                RecipesState.ShowLoading::class,
+                RecipesState.ShowError::class
+            )
+
+            collectJob.cancel()
+        }
 
     private companion object {
         const val ID_RECIPE = "ID_RECIPE"
+        const val ERROR_MESSAGE = "ERROR_MESSAGE"
     }
 }

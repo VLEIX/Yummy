@@ -2,7 +2,7 @@
 
     <!-- Common -->
     <string name="app_name">Yummy</string>
-    <string name="error_connection">Hubo un error de conexión</string>
+    <string name="common_error">Ocurrió un error\n😢</string>
 
     <!-- Home -->
     <string name="title_recipes">Recetas</string>
@@ -25,7 +25,7 @@
 
     <!-- Recipes - Search -->
     <string name="search_title">Buscar</string>
-    <string name="search_no_recipes">No se encontraron recetas</string>
+    <string name="search_no_recipes">No se encontraron recetas\n👀</string>
 
     <!-- Recipes - Detail -->
     <string name="detail_title">Detalle</string>

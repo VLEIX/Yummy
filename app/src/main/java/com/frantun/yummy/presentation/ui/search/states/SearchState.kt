@@ -7,4 +7,5 @@ sealed class SearchState {
     object ShowLoading : SearchState()
     object NoRecipes : SearchState()
     data class RetrievedRecipes(val recipes: RecipesModelUi) : SearchState()
+    object ShowError : SearchState()
 }

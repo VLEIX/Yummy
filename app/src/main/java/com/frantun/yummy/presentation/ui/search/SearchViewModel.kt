@@ -44,7 +44,7 @@ class SearchViewModel @Inject constructor(
                 when (result) {
                     is Resource.Loading -> _state.value = SearchState.ShowLoading
                     is Resource.Success -> recipesSuccess(result.data)
-                    is Resource.Error -> Unit
+                    is Resource.Error -> _state.value = SearchState.ShowError
                 }
             }.launchIn(this)
         }
