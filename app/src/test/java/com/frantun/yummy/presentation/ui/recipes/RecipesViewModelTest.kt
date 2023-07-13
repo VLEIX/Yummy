@@ -23,7 +23,7 @@ import org.mockito.kotlin.whenever
  *
  */
 @ExperimentalCoroutinesApi
-class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
+class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState>() {
 
     private lateinit var sut: RecipesViewModel
 
@@ -36,7 +36,7 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
     override fun before() {
         super.before()
 
-        whenever(recipe.recipeId).thenReturn(ID_RECIPE)
+        whenever(recipe.recipeId).thenReturn(RECIPE_ID)
     }
 
     private suspend fun setupSut() {
@@ -59,7 +59,7 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
                 RecipesState.RetrievedRecipes::class
             )
             with(stateList[1] as RecipesState.RetrievedRecipes) {
-                assertEquals(ID_RECIPE, recipes.recipes.first().recipeId)
+                assertEquals(RECIPE_ID, recipes.recipes.first().recipeId)
             }
 
             collectJob.cancel()
@@ -85,7 +85,7 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState?>() {
         }
 
     private companion object {
-        const val ID_RECIPE = "ID_RECIPE"
+        const val RECIPE_ID = "RECIPE_ID"
         const val ERROR_MESSAGE = "ERROR_MESSAGE"
     }
 }

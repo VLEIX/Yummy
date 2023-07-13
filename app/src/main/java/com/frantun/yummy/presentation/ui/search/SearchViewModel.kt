@@ -8,8 +8,6 @@ import com.frantun.yummy.domain.usecase.GetRecipesByTextUseCase
 import com.frantun.yummy.presentation.ui.search.states.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -24,20 +22,17 @@ class SearchViewModel @Inject constructor(
     private val _state = MutableStateFlow<SearchState>(SearchState.Initialized)
     val state: StateFlow<SearchState> get() = _state
 
-    private var job: Job? = null
-
     fun getRecipes(text: String) {
-        job?.cancel()
         if (text.isNotEmpty()) {
-            retrieveRecipesByText(text)
+            searchRecipesByText(text)
         } else {
             _state.value = SearchState.Initialized
         }
     }
 
-    private fun retrieveRecipesByText(text: String) {
-        job = viewModelScope.launch {
-            delay(SEARCH_TIME_DELAY)
+    private fun searchRecipesByText(text: String) {
+        viewModelScope.launch {
+            _state.value = SearchState.ShowLoading
 
             val resource = getRecipesByTextUseCase(text)
             resource.onEach { result ->
@@ -58,9 +53,5 @@ class SearchViewModel @Inject constructor(
                 _state.value = SearchState.RetrievedRecipes(it)
             }
         }
-    }
-
-    private companion object {
-        const val SEARCH_TIME_DELAY = 400L
     }
 }

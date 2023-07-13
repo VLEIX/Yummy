@@ -11,8 +11,8 @@ import com.frantun.yummy.domain.repository.RecipesRepository
 import javax.inject.Inject
 
 class RecipesRepositoryImpl @Inject constructor(
-    private val recipesLocalDataSource: RecipesLocalDataSource,
     private val recipesRemoteDataSource: RecipesRemoteDataSource,
+    private val recipesLocalDataSource: RecipesLocalDataSource,
     private val recipeDataMapper: RecipeDataMapper,
 ) : RecipesRepository {
 

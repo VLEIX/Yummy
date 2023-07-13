@@ -1,7 +1,6 @@
 package com.frantun.yummy.common
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestScope
 import org.junit.After
 import org.junit.Before
 import org.mockito.MockitoAnnotations
@@ -12,7 +11,6 @@ import org.mockito.MockitoAnnotations
 @ExperimentalCoroutinesApi
 open class BaseCoroutineViewModelStateTest<T> : BaseCoroutineTest() {
 
-    protected val scope = TestScope(mainDispatcherRule.testDispatcher)
     protected var stateList = mutableListOf<T>()
 
     @Before

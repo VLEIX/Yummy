@@ -1,6 +1,7 @@
 package com.frantun.yummy.common
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestScope
 import org.junit.Rule
 
 /**
@@ -11,4 +12,6 @@ abstract class BaseCoroutineTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
+
+    protected val scope = TestScope(mainDispatcherRule.testDispatcher)
 }
