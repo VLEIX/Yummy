@@ -8,11 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.frantun.yummy.R
 import com.frantun.yummy.databinding.FragmentFavoritesBinding
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
+import com.frantun.yummy.other.navigateTo
 import com.frantun.yummy.other.setAsGone
 import com.frantun.yummy.other.setAsVisible
 import com.frantun.yummy.presentation.adapters.FavoriteAdapterListener
@@ -47,7 +49,6 @@ class FavoritesFragment :
         super.onViewCreated(view, savedInstanceState)
 
         setupUi()
-        setupListeners()
         setupAnimations()
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -77,12 +78,6 @@ class FavoritesFragment :
         binding.recipesRecyclerView.doOnPreDraw {
             startPostponedEnterTransition()
         }
-    }
-
-    private fun setupListeners() {
-//        binding.searchEditText.setOnClickListener {
-//            navigateToSearch()
-//        }
     }
 
     private fun onStateUpdated(state: FavoritesState) {
@@ -137,10 +132,10 @@ class FavoritesFragment :
     }
 
     private fun navigateToDetail(recipe: RecipeModelUi, thumbImageView: ShapeableImageView) {
-//        val action = SavedFragmentDirections.actionToDetail(recipe)
-//        val extras = FragmentNavigatorExtras(
-//            thumbImageView to thumbImageView.transitionName
-//        )
-//        navigateTo(action, extras)
+        val action = FavoritesFragmentDirections.actionToDetail(recipe)
+        val extras = FragmentNavigatorExtras(
+            thumbImageView to thumbImageView.transitionName
+        )
+        navigateTo(action, extras)
     }
 }
