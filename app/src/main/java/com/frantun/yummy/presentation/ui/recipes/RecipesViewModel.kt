@@ -3,7 +3,10 @@ package com.frantun.yummy.presentation.ui.recipes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.frantun.yummy.common.Resource
+import com.frantun.yummy.domain.model.FavoriteModelUi
+import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
+import com.frantun.yummy.domain.usecase.DeleteFavoriteUseCase
 import com.frantun.yummy.domain.usecase.GetLocalRecipesUseCase
 import com.frantun.yummy.domain.usecase.GetRecipesUseCase
 import com.frantun.yummy.domain.usecase.InsertFavoriteUseCase
@@ -20,7 +23,8 @@ import kotlinx.coroutines.flow.onEach
 class RecipesViewModel @Inject constructor(
     private val getRecipesUseCase: GetRecipesUseCase,
     private val insertFavoriteUseCase: InsertFavoriteUseCase,
-    private val getLocalRecipesUseCase: GetLocalRecipesUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
+    private val getLocalRecipesUseCase: GetLocalRecipesUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<RecipesState>(RecipesState.ShowLoading)
@@ -35,7 +39,13 @@ class RecipesViewModel @Inject constructor(
         executeRecipesFlow(resource)
     }
 
-    fun insertFavorite(favoriteId: String) {
+    fun updateFavorite(recipe: RecipeModelUi) {
+        recipe.favorite?.let {
+            deleteFavorite(it)
+        } ?: insertFavorite(recipe.recipeId)
+    }
+
+    private fun insertFavorite(favoriteId: String) {
         val insertResult = insertFavoriteUseCase(favoriteId)
         insertResult.onEach { result ->
             when (result) {
@@ -45,7 +55,17 @@ class RecipesViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun getLocalRecipes() {
+    private fun deleteFavorite(favorite: FavoriteModelUi) {
+        val insertResult = deleteFavoriteUseCase(favorite)
+        insertResult.onEach { result ->
+            when (result) {
+                is Resource.Success -> getLocalRecipes()
+                else -> Unit
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun getLocalRecipes() {
         val resource = getLocalRecipesUseCase()
         executeRecipesFlow(resource)
     }

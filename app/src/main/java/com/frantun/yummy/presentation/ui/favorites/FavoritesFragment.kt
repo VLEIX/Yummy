@@ -3,6 +3,7 @@ package com.frantun.yummy.presentation.ui.favorites
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnPreDraw
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipesAdapter
 import com.frantun.yummy.presentation.common.BaseFragment
 import com.frantun.yummy.presentation.ui.favorites.states.FavoritesState
+import com.frantun.yummy.presentation.ui.home.HomeViewModel
 import com.google.android.material.imageview.ShapeableImageView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,6 +30,7 @@ class FavoritesFragment :
     BaseFragment<FragmentFavoritesBinding>(FragmentFavoritesBinding::inflate) {
 
     private val viewModel: FavoritesViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     private val recipesAdapter by lazy {
         RecipesAdapter(
@@ -35,7 +38,7 @@ class FavoritesFragment :
                 navigateToDetail(recipe, thumbImageView)
             },
             FavoriteAdapterListener {
-
+                viewModel.updateFavorite(it)
             },
         )
     }
@@ -122,6 +125,8 @@ class FavoritesFragment :
     }
 
     private fun onRetrievedRecipes(recipes: RecipesModelUi) {
+        homeViewModel.updateFavorite(true)
+
         binding.apply {
             progressAnimationView.setAsGone()
             favoriteAnimationView.setAsGone()

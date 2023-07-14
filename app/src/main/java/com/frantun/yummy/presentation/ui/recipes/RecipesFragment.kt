@@ -3,8 +3,10 @@ package com.frantun.yummy.presentation.ui.recipes
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnPreDraw
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -20,6 +22,7 @@ import com.frantun.yummy.presentation.adapters.FavoriteAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipesAdapter
 import com.frantun.yummy.presentation.common.BaseFragment
+import com.frantun.yummy.presentation.ui.home.HomeViewModel
 import com.frantun.yummy.presentation.ui.recipes.states.RecipesState
 import com.google.android.material.imageview.ShapeableImageView
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +32,7 @@ import kotlinx.coroutines.launch
 class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBinding::inflate) {
 
     private val viewModel: RecipesViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     private val recipesAdapter by lazy {
         RecipesAdapter(
@@ -36,7 +40,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
                 navigateToDetail(recipe, thumbImageView)
             },
             FavoriteAdapterListener {
-                viewModel.insertFavorite(it.recipeId)
+                viewModel.updateFavorite(it)
             },
         )
     }
@@ -55,6 +59,11 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
                 }
             }
         }
+        homeViewModel.isUpdatedFavorite.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.getLocalRecipes()
+            }
+        })
     }
 
     private fun setupUi() {

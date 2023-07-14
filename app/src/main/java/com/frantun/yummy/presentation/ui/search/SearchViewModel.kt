@@ -3,8 +3,12 @@ package com.frantun.yummy.presentation.ui.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.frantun.yummy.common.Resource
+import com.frantun.yummy.domain.model.FavoriteModelUi
+import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
+import com.frantun.yummy.domain.usecase.DeleteFavoriteUseCase
 import com.frantun.yummy.domain.usecase.GetRecipesByTextUseCase
+import com.frantun.yummy.domain.usecase.InsertFavoriteUseCase
 import com.frantun.yummy.presentation.ui.search.states.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -16,15 +20,20 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val getRecipesByTextUseCase: GetRecipesByTextUseCase
+    private val getRecipesByTextUseCase: GetRecipesByTextUseCase,
+    private val insertFavoriteUseCase: InsertFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SearchState>(SearchState.Initialized)
     val state: StateFlow<SearchState> get() = _state
 
+    private var textToSearch = ""
+
     fun getRecipes(text: String) {
-        if (text.isNotEmpty()) {
-            searchRecipesByText(text)
+        textToSearch = text
+        if (textToSearch.isNotEmpty()) {
+            searchRecipesByText(textToSearch)
         } else {
             _state.value = SearchState.Initialized
         }
@@ -43,6 +52,32 @@ class SearchViewModel @Inject constructor(
                 }
             }.launchIn(this)
         }
+    }
+
+    fun updateFavorite(recipe: RecipeModelUi) {
+        recipe.favorite?.let {
+            deleteFavorite(it)
+        } ?: insertFavorite(recipe.recipeId)
+    }
+
+    private fun insertFavorite(favoriteId: String) {
+        val insertResult = insertFavoriteUseCase(favoriteId)
+        insertResult.onEach { result ->
+            when (result) {
+                is Resource.Success -> getRecipes(textToSearch)
+                else -> Unit
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun deleteFavorite(favorite: FavoriteModelUi) {
+        val insertResult = deleteFavoriteUseCase(favorite)
+        insertResult.onEach { result ->
+            when (result) {
+                is Resource.Success -> getRecipes(textToSearch)
+                else -> Unit
+            }
+        }.launchIn(viewModelScope)
     }
 
     private fun recipesSuccess(recipes: RecipesModelUi?) {

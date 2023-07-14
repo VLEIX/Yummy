@@ -45,7 +45,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
                 navigateToDetail(recipe, thumbImageView)
             },
             FavoriteAdapterListener {
-
+                viewModel.updateFavorite(it)
             },
         )
     }
