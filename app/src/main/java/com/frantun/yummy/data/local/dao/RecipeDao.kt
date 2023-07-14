@@ -19,6 +19,14 @@ interface RecipeDao {
     suspend fun getRecipes(): List<RecipeAndRelations>
 
     @Transaction
-    @Query("SELECT * FROM recipes WHERE name LIKE '%' || :text || '%' OR tags LIKE '%' || :text || '%'")
+    @Query(
+        "SELECT recipes.* FROM recipes JOIN ingredients ON recipes.recipeId == ingredients.ingredientRecipeId " +
+                "WHERE recipes.name LIKE '%' || :text || '%' OR ingredients.name LIKE '%' || :text || '%' " +
+                "GROUP BY recipes.recipeId"
+    )
     suspend fun getRecipesByText(text: String): List<RecipeAndRelations>
+
+    @Transaction
+    @Query("SELECT recipes.* FROM recipes, favorites WHERE recipes.recipeId == favorites.favoriteId")
+    suspend fun getFavoritesRecipes(): List<RecipeAndRelations>
 }

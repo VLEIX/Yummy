@@ -15,8 +15,6 @@ data class RecipeDto(
     val instructions: String,
     @SerializedName("thumb")
     val thumb: String,
-    @SerializedName("tags")
-    val tags: String,
     @SerializedName("video")
     val video: String,
     @SerializedName("ingredients")

@@ -3,6 +3,7 @@ package com.frantun.yummy.domain.mappers
 import android.util.Log
 import com.frantun.yummy.common.Mapper
 import com.frantun.yummy.data.local.entity.RecipeAndRelations
+import com.frantun.yummy.domain.model.FavoriteModelUi
 import com.frantun.yummy.domain.model.IngredientModelUi
 import com.frantun.yummy.domain.model.OriginModelUi
 import com.frantun.yummy.domain.model.RecipeModelUi
@@ -26,16 +27,23 @@ class RecipeDataMapper @Inject constructor() : Mapper<List<RecipeAndRelations>, 
                         ingredient.measure,
                     )
                 }.toList()
+                val favorite = it.favorite?.let { fav ->
+                    FavoriteModelUi(
+                        favoriteId = fav.favoriteId,
+                        timestamp = fav.timestamp,
+                    )
+                }
+
                 RecipeModelUi(
                     recipeId = it.recipe.recipeId,
                     name = it.recipe.name,
                     category = it.recipe.category,
                     instructions = it.recipe.instructions,
                     thumb = it.recipe.thumb,
-                    tags = it.recipe.tags,
                     video = it.recipe.video,
                     origin = origin,
                     ingredients = ingredients,
+                    favorite = favorite
                 )
             }.toList()
 

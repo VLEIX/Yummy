@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="food_loading">food_loading.json</string>
+    <string name="favorite">favorite.json</string>
+    <string name="food_cooking">food_cooking.json</string>
+    <string name="cat_working">cat_working.json</string>
+</resources>

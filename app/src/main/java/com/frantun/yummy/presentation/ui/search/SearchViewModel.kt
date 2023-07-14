@@ -52,6 +52,8 @@ class SearchViewModel @Inject constructor(
             } else {
                 _state.value = SearchState.RetrievedRecipes(it)
             }
+        } ?: run {
+            _state.value = SearchState.ShowError
         }
     }
 }

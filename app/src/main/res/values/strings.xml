@@ -6,7 +6,7 @@
 
     <!-- Home -->
     <string name="title_recipes">Recetas</string>
-    <string name="title_saved">Guardados</string>
+    <string name="title_favorites">Favoritos</string>
     <string name="title_profile">Perfil</string>
 
     <!-- Recipes -->
@@ -35,8 +35,8 @@
     <!-- Recipes - Detail - Map -->
     <string name="map_title">Mapa</string>
 
-    <!-- Saved -->
-    <string name="saved_title">Guardados</string>
+    <!-- Favorites -->
+    <string name="favorites_title">Favoritos</string>
 
     <!-- Profile -->
     <string name="profile_title">Perfil</string>

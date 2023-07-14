@@ -13,7 +13,7 @@ import javax.inject.Inject
 class RecipesLocalDataSourceImpl @Inject constructor(
     private val recipeDao: RecipeDao,
     private val originDao: OriginDao,
-    private val ingredientDao: IngredientDao
+    private val ingredientDao: IngredientDao,
 ) : RecipesLocalDataSource {
 
     override suspend fun insertRecipes(recipes: List<RecipeDto>) {
@@ -25,7 +25,6 @@ class RecipesLocalDataSourceImpl @Inject constructor(
                     it.category,
                     it.instructions,
                     it.thumb,
-                    it.tags,
                     it.video
                 )
             )
@@ -56,5 +55,9 @@ class RecipesLocalDataSourceImpl @Inject constructor(
 
     override suspend fun getRecipesByText(text: String): List<RecipeAndRelations> {
         return recipeDao.getRecipesByText(text)
+    }
+
+    override suspend fun getFavoritesRecipes(): List<RecipeAndRelations> {
+        return recipeDao.getFavoritesRecipes()
     }
 }

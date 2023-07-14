@@ -11,8 +11,8 @@ data class RecipeModelUi(
     val category: String,
     val instructions: String,
     val thumb: String,
-    val tags: String,
     val video: String,
     val origin: OriginModelUi,
     val ingredients: @RawValue List<IngredientModelUi>,
+    val favorite: FavoriteModelUi?,
 ) : Parcelable

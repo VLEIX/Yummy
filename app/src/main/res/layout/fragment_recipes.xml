@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="food_loading.json"
+        app:lottie_fileName="@string/food_loading"
         app:lottie_loop="true"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

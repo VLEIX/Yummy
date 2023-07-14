@@ -7,4 +7,5 @@ interface RecipesLocalDataSource {
     suspend fun insertRecipes(recipes: List<RecipeDto>)
     suspend fun getRecipes(): List<RecipeAndRelations>
     suspend fun getRecipesByText(text: String): List<RecipeAndRelations>
+    suspend fun getFavoritesRecipes(): List<RecipeAndRelations>
 }

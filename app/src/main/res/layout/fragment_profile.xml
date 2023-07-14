@@ -29,6 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_text_view"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="cat_working.json"
+        app:lottie_fileName="@string/cat_working"
         app:lottie_loop="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

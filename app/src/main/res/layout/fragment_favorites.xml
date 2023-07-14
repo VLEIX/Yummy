@@ -7,7 +7,7 @@
     android:paddingStart="@dimen/dimen_24dp"
     android:paddingTop="@dimen/dimen_24dp"
     android:paddingEnd="@dimen/dimen_24dp"
-    tools:context=".presentation.ui.saved.SavedFragment">
+    tools:context=".presentation.ui.favorites.FavoritesFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title_text_view"
@@ -15,7 +15,7 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_12dp"
-        android:text="@string/saved_title"
+        android:text="@string/favorites_title"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         tools:listitem="@layout/view_recipe" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/saved_animation_view"
+        android:id="@+id/favorite_animation_view"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_120dp"
         android:layout_marginTop="@dimen/dimen_24dp"
@@ -43,8 +43,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_text_view"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="saved.json"
-        app:lottie_loop="true"
+        app:lottie_fileName="@string/favorite"
+        app:lottie_loop="false"
         tools:visibility="visible" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="food_loading.json"
+        app:lottie_fileName="@string/food_loading"
         app:lottie_loop="true"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

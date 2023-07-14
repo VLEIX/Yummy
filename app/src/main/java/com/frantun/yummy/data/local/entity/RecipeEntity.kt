@@ -13,6 +13,5 @@ data class RecipeEntity(
     val category: String,
     val instructions: String,
     val thumb: String,
-    val tags: String,
     val video: String,
 )

@@ -15,5 +15,10 @@ data class RecipeAndRelations(
         parentColumn = "recipeId",
         entityColumn = "ingredientRecipeId"
     )
-    val ingredients: List<IngredientEntity>
+    val ingredients: List<IngredientEntity>,
+    @Relation(
+        parentColumn = "recipeId",
+        entityColumn = "favoriteId"
+    )
+    val favorite: FavoriteEntity?,
 )
