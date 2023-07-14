@@ -2,6 +2,7 @@ package com.frantun.yummy.presentation.ui.search
 
 import com.frantun.yummy.common.BaseCoroutineViewModelStateTest
 import com.frantun.yummy.common.Resource
+import com.frantun.yummy.domain.model.FavoriteModelUi
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.domain.usecase.DeleteFavoriteUseCase
@@ -41,6 +42,9 @@ class SearchViewModelTest : BaseCoroutineViewModelStateTest<SearchState>() {
 
     @Mock
     private lateinit var recipe: RecipeModelUi
+
+    @Mock
+    private lateinit var favorite: FavoriteModelUi
 
     override fun before() {
         super.before()
@@ -133,6 +137,69 @@ class SearchViewModelTest : BaseCoroutineViewModelStateTest<SearchState>() {
                 SearchState.ShowLoading::class,
                 SearchState.ShowError::class
             )
+
+            collectJob.cancel()
+        }
+
+    @Test
+    fun `Updating favorite should emit RetrievedRecipes when a favorite is inserted`() =
+        scope.runTest {
+            val flow = flow { emit(Resource.Success(RecipesModelUi(listOf(recipe)))) }
+            whenever(getRecipesByTextUseCase(any())).thenReturn(flow)
+            val flowInsert = flow { emit(Resource.Success(Unit)) }
+            whenever(insertFavoriteUseCase(any())).thenReturn(flowInsert)
+
+            val collectJob = backgroundScope.launch(UnconfinedTestDispatcher()) {
+                sut.state.toList(stateList)
+            }
+
+            sut.apply {
+                getRecipes(TEXT_TO_SEARCH)
+                updateFavorite(recipe)
+            }
+
+            stateList.assertStateOrder(
+                SearchState.Initialized::class,
+                SearchState.ShowLoading::class,
+                SearchState.RetrievedRecipes::class,
+                SearchState.ShowLoading::class,
+                SearchState.RetrievedRecipes::class
+            )
+            with(stateList[4] as SearchState.RetrievedRecipes) {
+                assertEquals(RECIPE_ID, recipes.recipes.first().recipeId)
+            }
+
+            collectJob.cancel()
+        }
+
+    @Test
+    fun `Updating favorite should emit RetrievedRecipes when a favorite is deleted`() =
+        scope.runTest {
+            whenever(recipe.favorite).thenReturn(favorite)
+            val flow = flow { emit(Resource.Success(RecipesModelUi(listOf(recipe)))) }
+            whenever(getRecipesByTextUseCase(any())).thenReturn(flow)
+            val flowDelete = flow { emit(Resource.Success(Unit)) }
+            whenever(deleteFavoriteUseCase(any())).thenReturn(flowDelete)
+
+            val collectJob = backgroundScope.launch(UnconfinedTestDispatcher()) {
+                sut.state.toList(stateList)
+            }
+
+            sut.apply {
+                getRecipes(TEXT_TO_SEARCH)
+                updateFavorite(recipe)
+            }
+
+            stateList.assertStateOrder(
+                SearchState.Initialized::class,
+                SearchState.ShowLoading::class,
+                SearchState.RetrievedRecipes::class,
+                SearchState.ShowLoading::class,
+                SearchState.RetrievedRecipes::class
+            )
+            with(stateList[4] as SearchState.RetrievedRecipes) {
+                assertEquals(RECIPE_ID, recipes.recipes.first().recipeId)
+            }
 
             collectJob.cancel()
         }

@@ -65,17 +65,17 @@ class SearchViewModel @Inject constructor(
         insertResult.onEach { result ->
             when (result) {
                 is Resource.Success -> getRecipes(textToSearch)
-                else -> Unit
+                else -> _state.value = SearchState.ShowError
             }
         }.launchIn(viewModelScope)
     }
 
     private fun deleteFavorite(favorite: FavoriteModelUi) {
-        val insertResult = deleteFavoriteUseCase(favorite)
-        insertResult.onEach { result ->
+        val deleteResult = deleteFavoriteUseCase(favorite)
+        deleteResult.onEach { result ->
             when (result) {
                 is Resource.Success -> getRecipes(textToSearch)
-                else -> Unit
+                else -> _state.value = SearchState.ShowError
             }
         }.launchIn(viewModelScope)
     }

@@ -50,17 +50,17 @@ class RecipesViewModel @Inject constructor(
         insertResult.onEach { result ->
             when (result) {
                 is Resource.Success -> getLocalRecipes()
-                else -> Unit
+                else -> _state.value = RecipesState.ShowError
             }
         }.launchIn(viewModelScope)
     }
 
     private fun deleteFavorite(favorite: FavoriteModelUi) {
-        val insertResult = deleteFavoriteUseCase(favorite)
-        insertResult.onEach { result ->
+        val deleteResult = deleteFavoriteUseCase(favorite)
+        deleteResult.onEach { result ->
             when (result) {
                 is Resource.Success -> getLocalRecipes()
-                else -> Unit
+                else -> _state.value = RecipesState.ShowError
             }
         }.launchIn(viewModelScope)
     }
