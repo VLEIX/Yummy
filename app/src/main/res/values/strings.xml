@@ -36,6 +36,8 @@
     <string name="map_title">Mapa</string>
 
     <!-- Saved -->
+    <string name="saved_title">Guardados</string>
 
     <!-- Profile -->
+    <string name="profile_title">Perfil</string>
 </resources>

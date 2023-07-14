@@ -68,7 +68,7 @@
         android:id="@+id/progress_animation_view"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_120dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
