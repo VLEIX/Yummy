@@ -7,4 +7,5 @@ interface RecipesRepository {
     suspend fun getRecipes(): Resource<RecipesModelUi>
     suspend fun getRecipesByText(text: String): Resource<RecipesModelUi>
     suspend fun getFavoriteRecipes(): Resource<RecipesModelUi>
+    suspend fun getLocalRecipes(): Resource<RecipesModelUi>
 }

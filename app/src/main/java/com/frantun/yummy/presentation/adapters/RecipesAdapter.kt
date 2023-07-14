@@ -11,9 +11,12 @@ import com.frantun.yummy.R
 import com.frantun.yummy.databinding.ViewRecipeBinding
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.other.setSafeOnClickListener
+import com.frantun.yummy.other.setTint
 
-class RecipesAdapter(private val listener: RecipeAdapterListener) :
-    ListAdapter<RecipeModelUi, RecyclerView.ViewHolder>(RecipesAdapterDiffCallback()) {
+class RecipesAdapter(
+    private val listener: RecipeAdapterListener,
+    private val listenerFavorite: FavoriteAdapterListener,
+) : ListAdapter<RecipeModelUi, RecyclerView.ViewHolder>(RecipesAdapterDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         RecipeViewHolder(
@@ -22,13 +25,17 @@ class RecipesAdapter(private val listener: RecipeAdapterListener) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        (holder as RecipeViewHolder).bind(item, listener)
+        (holder as RecipeViewHolder).bind(item, listener, listenerFavorite)
     }
 
     class RecipeViewHolder constructor(private val binding: ViewRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: RecipeModelUi, listener: RecipeAdapterListener) {
+        fun bind(
+            item: RecipeModelUi,
+            listener: RecipeAdapterListener,
+            listenerFavorite: FavoriteAdapterListener
+        ) {
             binding.apply {
                 nameTextView.text = item.name
                 shortInformationTextView.text = itemView.context.getString(
@@ -41,6 +48,15 @@ class RecipesAdapter(private val listener: RecipeAdapterListener) :
                     Glide.with(context)
                         .load(item.thumb)
                         .into(this)
+                }
+                favoriteImageView.apply {
+                    val tintColor = item.favorite?.let {
+                        R.color.yellow_favorite
+                    } ?: R.color.white
+                    setTint(tintColor)
+                    setSafeOnClickListener {
+                        listenerFavorite.onClick(item)
+                    }
                 }
             }
             itemView.apply {

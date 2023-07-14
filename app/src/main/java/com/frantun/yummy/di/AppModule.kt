@@ -1,12 +1,16 @@
 package com.frantun.yummy.di
 
 import com.frantun.yummy.BuildConfig
+import com.frantun.yummy.data.datasource.FavoritesLocalDataSource
+import com.frantun.yummy.data.datasource.FavoritesLocalDataSourceImpl
 import com.frantun.yummy.data.datasource.RecipesLocalDataSource
 import com.frantun.yummy.data.datasource.RecipesLocalDataSourceImpl
 import com.frantun.yummy.data.datasource.RecipesRemoteDataSource
 import com.frantun.yummy.data.datasource.RecipesRemoteDataSourceImpl
 import com.frantun.yummy.data.remote.RecipesApi
+import com.frantun.yummy.data.repository.FavoritesRepositoryImpl
 import com.frantun.yummy.data.repository.RecipesRepositoryImpl
+import com.frantun.yummy.domain.repository.FavoritesRepository
 import com.frantun.yummy.domain.repository.RecipesRepository
 import dagger.Binds
 import dagger.Module
@@ -55,9 +59,17 @@ abstract class BindsModule {
     abstract fun providesRecipesRepository(recipesRepository: RecipesRepositoryImpl): RecipesRepository
 
     @Binds
+    abstract fun providesFavoritesRepository(favoritesRepository: FavoritesRepositoryImpl): FavoritesRepository
+
+    @Binds
     abstract fun providesRecipesLocalDataSource(
         recipesLocalDataSource: RecipesLocalDataSourceImpl
     ): RecipesLocalDataSource
+
+    @Binds
+    abstract fun providesFavoritesLocalDataSource(
+        favoritesLocalDataSource: FavoritesLocalDataSourceImpl
+    ): FavoritesLocalDataSource
 
     @Binds
     abstract fun providesRecipesRemoteDataSource(

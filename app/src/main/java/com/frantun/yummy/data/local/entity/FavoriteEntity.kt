@@ -8,5 +8,5 @@ import java.util.Date
 data class FavoriteEntity(
     @PrimaryKey
     val favoriteId: String,
-    val timestamp: Date,
+    val timestamp: Date = Date(),
 )

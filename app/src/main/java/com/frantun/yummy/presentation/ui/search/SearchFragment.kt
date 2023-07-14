@@ -24,6 +24,7 @@ import com.frantun.yummy.other.setAsGone
 import com.frantun.yummy.other.setAsVisible
 import com.frantun.yummy.other.setSafeOnClickListener
 import com.frantun.yummy.other.showKeyboard
+import com.frantun.yummy.presentation.adapters.FavoriteAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipesAdapter
 import com.frantun.yummy.presentation.common.BaseFragment
@@ -39,9 +40,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
 
     private val recipesAdapter by lazy {
-        RecipesAdapter(RecipeAdapterListener { recipe, thumbImageView ->
-            navigateToDetail(recipe, thumbImageView)
-        })
+        RecipesAdapter(
+            RecipeAdapterListener { recipe, thumbImageView ->
+                navigateToDetail(recipe, thumbImageView)
+            },
+            FavoriteAdapterListener {
+
+            },
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

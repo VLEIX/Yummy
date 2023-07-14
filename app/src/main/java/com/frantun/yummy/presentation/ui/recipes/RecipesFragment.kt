@@ -16,6 +16,7 @@ import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.other.navigateTo
 import com.frantun.yummy.other.setAsGone
 import com.frantun.yummy.other.setAsVisible
+import com.frantun.yummy.presentation.adapters.FavoriteAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipesAdapter
 import com.frantun.yummy.presentation.common.BaseFragment
@@ -30,9 +31,14 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(FragmentRecipesBind
     private val viewModel: RecipesViewModel by viewModels()
 
     private val recipesAdapter by lazy {
-        RecipesAdapter(RecipeAdapterListener { recipe, thumbImageView ->
-            navigateToDetail(recipe, thumbImageView)
-        })
+        RecipesAdapter(
+            RecipeAdapterListener { recipe, thumbImageView ->
+                navigateToDetail(recipe, thumbImageView)
+            },
+            FavoriteAdapterListener {
+                viewModel.insertFavorite(it.recipeId)
+            },
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

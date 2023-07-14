@@ -27,6 +27,9 @@ interface RecipeDao {
     suspend fun getRecipesByText(text: String): List<RecipeAndRelations>
 
     @Transaction
-    @Query("SELECT recipes.* FROM recipes, favorites WHERE recipes.recipeId == favorites.favoriteId")
+    @Query(
+        "SELECT recipes.* FROM recipes JOIN favorites ON recipes.recipeId == favorites.favoriteId " +
+                "ORDER BY favorites.timestamp DESC"
+    )
     suspend fun getFavoritesRecipes(): List<RecipeAndRelations>
 }

@@ -20,6 +20,31 @@
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize20dp"
         app:tint="@color/black_with_alpha" />
 
+    <View
+        android:id="@+id/favorite_container_view"
+        android:layout_width="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_44dp"
+        android:layout_margin="@dimen/dimen_12dp"
+        android:background="@drawable/bg_black_with_alpha_rounded_8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/thumb_image_view" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/favorite_image_view"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:contentDescription="@string/recipes_recipe_content_description"
+        android:focusable="true"
+        android:padding="@dimen/dimen_6dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_favorite"
+        app:layout_constraintBottom_toBottomOf="@id/favorite_container_view"
+        app:layout_constraintEnd_toEndOf="@id/favorite_container_view"
+        app:layout_constraintStart_toStartOf="@id/favorite_container_view"
+        app:layout_constraintTop_toTopOf="@id/favorite_container_view"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize20dp"
+        tools:tint="@color/white" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/name_text_view"
         style="@style/TextAppearance.MaterialComponents.Headline4"
