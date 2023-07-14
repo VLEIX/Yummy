@@ -4,7 +4,7 @@ buildscript {
         hilt_version = '2.44'
         lifecycle_version = '2.6.1'
         room_version = '2.5.2'
-        navigation_version = '2.6.0'
+        navigation_version = '2.5.3'
         retrofit_version = '2.9.0'
         okhttp3_version = '4.11.0'
         glide_version = '4.13.2'

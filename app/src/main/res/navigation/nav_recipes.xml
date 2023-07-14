@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_recipes"
+    app:startDestination="@id/fragment_recipes">
+
+    <fragment
+        android:id="@+id/fragment_recipes"
+        android:name="com.frantun.yummy.presentation.ui.recipes.RecipesFragment"
+        android:label="@string/title_recipes"
+        tools:layout="@layout/fragment_recipes">
+
+        <action
+            android:id="@+id/action_to_detail"
+            app:destination="@id/fragment_detail" />
+
+        <action
+            android:id="@+id/action_to_search"
+            app:destination="@id/fragment_search" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_detail"
+        android:name="com.frantun.yummy.presentation.ui.detail.DetailFragment"
+        android:label="@string/detail_title"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="recipe"
+            app:argType="com.frantun.yummy.domain.model.RecipeModelUi"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_to_map"
+            app:destination="@id/dialog_map" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/dialog_map"
+        android:name="com.frantun.yummy.presentation.ui.map.MapBottomSheet"
+        android:label="@string/map_title"
+        tools:layout="@layout/bottom_sheet_map">
+        <argument
+            android:name="origin"
+            app:argType="com.frantun.yummy.domain.model.OriginModelUi"
+            app:nullable="false" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="com.frantun.yummy.presentation.ui.search.SearchFragment"
+        android:label="@string/search_title"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_to_detail"
+            app:destination="@id/fragment_detail" />
+    </fragment>
+</navigation>

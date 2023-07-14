@@ -19,7 +19,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     }
 
     private fun setBottomNavigation() {
-        val navView: BottomNavigationView = binding.homeNavView
+        val navView: BottomNavigationView = binding.homeBottomNavView
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
