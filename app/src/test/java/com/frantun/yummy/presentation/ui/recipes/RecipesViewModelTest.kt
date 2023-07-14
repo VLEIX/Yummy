@@ -4,7 +4,10 @@ import com.frantun.yummy.common.BaseCoroutineViewModelStateTest
 import com.frantun.yummy.common.Resource
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
+import com.frantun.yummy.domain.usecase.DeleteFavoriteUseCase
+import com.frantun.yummy.domain.usecase.GetLocalRecipesUseCase
 import com.frantun.yummy.domain.usecase.GetRecipesUseCase
+import com.frantun.yummy.domain.usecase.InsertFavoriteUseCase
 import com.frantun.yummy.other.assertStateOrder
 import com.frantun.yummy.presentation.ui.recipes.states.RecipesState
 import kotlin.test.assertEquals
@@ -31,6 +34,15 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState>() {
     private lateinit var getRecipesUseCase: GetRecipesUseCase
 
     @Mock
+    private lateinit var insertFavoriteUseCase: InsertFavoriteUseCase
+
+    @Mock
+    private lateinit var deleteFavoriteUseCase: DeleteFavoriteUseCase
+
+    @Mock
+    private lateinit var getLocalRecipesUseCase: GetLocalRecipesUseCase
+
+    @Mock
     private lateinit var recipe: RecipeModelUi
 
     override fun before() {
@@ -40,7 +52,12 @@ class RecipesViewModelTest : BaseCoroutineViewModelStateTest<RecipesState>() {
     }
 
     private suspend fun setupSut() {
-        sut = RecipesViewModel(getRecipesUseCase)
+        sut = RecipesViewModel(
+            getRecipesUseCase,
+            insertFavoriteUseCase,
+            deleteFavoriteUseCase,
+            getLocalRecipesUseCase,
+        )
         sut.state.toList(stateList)
     }
 

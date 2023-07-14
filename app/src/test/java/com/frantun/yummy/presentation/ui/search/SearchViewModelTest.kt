@@ -4,7 +4,9 @@ import com.frantun.yummy.common.BaseCoroutineViewModelStateTest
 import com.frantun.yummy.common.Resource
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
+import com.frantun.yummy.domain.usecase.DeleteFavoriteUseCase
 import com.frantun.yummy.domain.usecase.GetRecipesByTextUseCase
+import com.frantun.yummy.domain.usecase.InsertFavoriteUseCase
 import com.frantun.yummy.other.assertStateOrder
 import com.frantun.yummy.presentation.ui.search.states.SearchState
 import kotlin.test.assertEquals
@@ -32,12 +34,22 @@ class SearchViewModelTest : BaseCoroutineViewModelStateTest<SearchState>() {
     private lateinit var getRecipesByTextUseCase: GetRecipesByTextUseCase
 
     @Mock
+    private lateinit var insertFavoriteUseCase: InsertFavoriteUseCase
+
+    @Mock
+    private lateinit var deleteFavoriteUseCase: DeleteFavoriteUseCase
+
+    @Mock
     private lateinit var recipe: RecipeModelUi
 
     override fun before() {
         super.before()
 
-        sut = SearchViewModel(getRecipesByTextUseCase)
+        sut = SearchViewModel(
+            getRecipesByTextUseCase,
+            insertFavoriteUseCase,
+            deleteFavoriteUseCase
+        )
 
         whenever(recipe.recipeId).thenReturn(RECIPE_ID)
     }

@@ -72,7 +72,6 @@ class RecipesLocalDataSourceImplTest : BaseCoroutineTest() {
             originDto,
             RECIPE_INSTRUCTIONS,
             RECIPE_THUMB,
-            RECIPE_TAGS,
             RECIPE_VIDEO,
             listOf(ingredientDto, ingredientDto2)
         )
@@ -130,7 +129,6 @@ class RecipesLocalDataSourceImplTest : BaseCoroutineTest() {
         const val RECIPE_CATEGORY = "RECIPE_CATEGORY"
         const val RECIPE_INSTRUCTIONS = "RECIPE_INSTRUCTIONS"
         const val RECIPE_THUMB = "RECIPE_THUMB"
-        const val RECIPE_TAGS = "RECIPE_TAGS"
         const val RECIPE_VIDEO = "RECIPE_VIDEO"
     }
 }
