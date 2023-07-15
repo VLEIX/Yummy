@@ -39,5 +39,5 @@ Light | Dark
 * [Retrofit](https://square.github.io/retrofit/)
 * [Android Youtube Player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
 * [Lottie](https://lottiefiles.com/)
-* [Glide](https://github.com/bumptech/glide)https://github.com/bumptech/glide
-* [Mockito](https://site.mockito.org/)https://site.mockito.org/
+* [Glide](https://github.com/bumptech/glide)
+* [Mockito](https://site.mockito.org/)
