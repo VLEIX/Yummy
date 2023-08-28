@@ -15,13 +15,13 @@ import com.frantun.yummy.R
 import com.frantun.yummy.databinding.FragmentRecipesBinding
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi
-import com.frantun.yummy.other.navigateTo
-import com.frantun.yummy.other.setAsGone
-import com.frantun.yummy.other.setAsVisible
+import com.frantun.core.extensions.navigateTo
+import com.frantun.core.extensions.setAsGone
+import com.frantun.core.extensions.setAsVisible
 import com.frantun.yummy.presentation.adapters.FavoriteAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipeAdapterListener
 import com.frantun.yummy.presentation.adapters.RecipesAdapter
-import com.frantun.yummy.presentation.common.BaseFragment
+import com.frantun.core.base.BaseFragment
 import com.frantun.yummy.presentation.ui.home.HomeViewModel
 import com.frantun.yummy.presentation.ui.recipes.states.RecipesState
 import com.google.android.material.imageview.ShapeableImageView

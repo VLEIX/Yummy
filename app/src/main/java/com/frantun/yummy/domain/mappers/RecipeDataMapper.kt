@@ -1,7 +1,7 @@
 package com.frantun.yummy.domain.mappers
 
 import android.util.Log
-import com.frantun.yummy.common.Mapper
+import com.frantun.core.common.Mapper
 import com.frantun.yummy.data.local.entity.RecipeAndRelations
 import com.frantun.yummy.domain.model.FavoriteModelUi
 import com.frantun.yummy.domain.model.IngredientModelUi

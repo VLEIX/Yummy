@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
 import com.frantun.yummy.R
-import com.frantun.yummy.common.BitmapHelper
+import com.frantun.core.utils.BitmapHelper
 import com.frantun.yummy.databinding.BottomSheetMapBinding
-import com.frantun.yummy.presentation.common.BaseBottomSheet
+import com.frantun.core.base.BaseBottomSheet
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment

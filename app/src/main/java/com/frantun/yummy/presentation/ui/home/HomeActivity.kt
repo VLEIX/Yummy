@@ -5,7 +5,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.frantun.yummy.databinding.ActivityHomeBinding
-import com.frantun.yummy.presentation.common.BaseActivity
+import com.frantun.core.base.BaseActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 

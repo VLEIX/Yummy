@@ -1,7 +1,7 @@
 package com.frantun.yummy.domain.usecase
 
 import com.frantun.yummy.common.Constants.ERROR_UNEXPECTED
-import com.frantun.yummy.common.Resource
+import com.frantun.core.common.Resource
 import com.frantun.yummy.domain.model.RecipesModelUi
 import com.frantun.yummy.domain.repository.RecipesRepository
 import javax.inject.Inject

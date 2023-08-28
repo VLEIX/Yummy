@@ -1,7 +1,7 @@
 package com.frantun.yummy.data.repository
 
 import com.frantun.yummy.common.BaseCoroutineTest
-import com.frantun.yummy.common.Resource
+import com.frantun.core.common.Resource
 import com.frantun.yummy.data.datasource.RecipesLocalDataSource
 import com.frantun.yummy.data.datasource.RecipesRemoteDataSource
 import com.frantun.yummy.data.local.entity.RecipeAndRelations

@@ -1,7 +1,7 @@
 package com.frantun.yummy.presentation.ui.favorites
 
 import com.frantun.yummy.common.BaseCoroutineViewModelStateTest
-import com.frantun.yummy.common.Resource
+import com.frantun.core.common.Resource
 import com.frantun.yummy.domain.model.FavoriteModelUi
 import com.frantun.yummy.domain.model.RecipeModelUi
 import com.frantun.yummy.domain.model.RecipesModelUi

@@ -1,7 +1,7 @@
 package com.frantun.yummy.presentation.ui.profile
 
 import com.frantun.yummy.databinding.FragmentProfileBinding
-import com.frantun.yummy.presentation.common.BaseFragment
+import com.frantun.core.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

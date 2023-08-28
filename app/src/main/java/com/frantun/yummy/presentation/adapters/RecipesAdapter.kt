@@ -10,8 +10,8 @@ import com.bumptech.glide.Glide
 import com.frantun.yummy.R
 import com.frantun.yummy.databinding.ViewRecipeBinding
 import com.frantun.yummy.domain.model.RecipeModelUi
-import com.frantun.yummy.other.setSafeOnClickListener
-import com.frantun.yummy.other.setTint
+import com.frantun.core.extensions.setSafeOnClickListener
+import com.frantun.core.extensions.setTint
 
 class RecipesAdapter(
     private val listener: RecipeAdapterListener,
